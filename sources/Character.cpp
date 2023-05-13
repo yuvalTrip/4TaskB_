@@ -43,7 +43,7 @@ namespace ariel {
         return location;
     }
 
-    void Character::print() {// Print the character's name, number of hits, and current location
+    string Character::print() {// Print the character's name, number of hits, and current location
         // If the character is dead, the number of hits will not be printed and the name will be enclosed in parentheses
         // A letter indicating the type of character (N for ninja, C for cowboy) will be displayed before the name
             if (this->isAlive()) {
@@ -52,6 +52,7 @@ namespace ariel {
             } else {
                 std::cout << "(" << name << ")";
             }
+            return "";
 
 
         }

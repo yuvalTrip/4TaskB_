@@ -26,7 +26,7 @@ public:
     void hit(int hits);//פגע hit מקבל מספר שלם. מחסיר את כמות נקודות הפגיעה המתאים מהדמות. לא מחזיר דבר. –
     string getName();// Return character name
     Point getLocation();// Return character location
-    void print();// Print: character name, number of hits, point of the character
+    string print();// Print: character name, number of hits, point of the character
     // If character is dead, her number of hit will not be printed and character name will display in ()
     // Before character name a letter will be display N to ninja, C to cowboy
 };
