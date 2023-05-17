@@ -18,6 +18,7 @@ namespace ariel {
     void Cowboy::shoot(Character *other)//get pointer to the enemy.
     {
         bullets--;//Decrease by 1
+        other->hits--;
     }
 
     bool Cowboy::hasboolets()// If there are left any bullets in the cowboy gun

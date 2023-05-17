@@ -24,6 +24,7 @@ namespace ariel {
         Team(Character *leader);
         Team();// Default constructor
         Character leader;
+        int howManyAlive=0;
 
         void add(Character *other);
 

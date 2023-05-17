@@ -18,7 +18,7 @@ namespace ariel {
 
     bool Character::isAlive()// Is Character alive?== Is Character has more than 0 hits points
     {
-        return true;
+        return (hits>0);
     }
 
     double Character::distance( Character *other)//return distance between 2 Characters

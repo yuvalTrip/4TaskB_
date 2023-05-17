@@ -5,11 +5,18 @@
 #include "Team.hpp"
 namespace ariel {
 
-    Team::Team(Character *leader) {
+    Team::Team(Character *leader)
+    {
+        howManyAlive++;
 
     }
 
     void Team::add(Character *other) {
+        if (howManyAlive==10)
+        {
+            throw std::runtime_error("Can not have more than 10 teammates");
+        }
+        howManyAlive++;
     }
 
     void Team::attack(const Team *other)
@@ -19,6 +26,7 @@ namespace ariel {
     }
 
     int Team::stillAlive() {
+        return howManyAlive;
         return 0;
     }
 
