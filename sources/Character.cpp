@@ -18,19 +18,17 @@ namespace ariel {
 
     bool Character::isAlive()// Is Character alive?== Is Character has more than 0 hits points
     {
-        return hits > 0;
+        return true;
     }
 
-    double Character::distance(Character &other)//return distance between 2 Characters
+    double Character::distance( Character *other)//return distance between 2 Characters
     {
-        Point first = location;
-        Point second = other.location;
-        double distance_ = first.distance(second);
-        return distance_;
+        return 0;
     }
 
-    void Character::hit(int hits) {    // Reduce the character's hit points by the specified amount
-        this->hits -= hits;
+    void Character::hit(int hits)//פגע hit מקבל מספר שלם. מחסיר את כמות נקודות הפגיעה המתאים מהדמות. לא מחזיר דבר. –
+    {
+
     }
 
     string Character::getName()// Return character name
@@ -43,17 +41,14 @@ namespace ariel {
         return location;
     }
 
-    string Character::print() {// Print the character's name, number of hits, and current location
-        // If the character is dead, the number of hits will not be printed and the name will be enclosed in parentheses
-        // A letter indicating the type of character (N for ninja, C for cowboy) will be displayed before the name
-            if (this->isAlive()) {
-                std::cout << name << "," << hits << ",";
-                location.print();
-            } else {
-                std::cout << "(" << name << ")";
-            }
-            return "";
+    string Character::print()
+    {
+        std::string characterInfo = name + "," + std::to_string(hits) + ", Location: (" + std::to_string(location.getX()) + ", " + std::to_string(location.getY()) + ")";
 
-
-        }
+        std::cout << characterInfo << std::endl; // We can print the result to the console
+        return characterInfo;
     }
+
+
+
+}

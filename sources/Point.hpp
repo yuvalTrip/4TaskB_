@@ -21,10 +21,12 @@ namespace ariel {
     public:
         Point(const double &x_value, const double &y_value); //Constructor get 2 coordinate
         Point();// Empty Constructor
-        double distance(Point other_point);//Get point and calculate the distance between 2 points
+        double distance(const Point& otherPoint)const;//Get point and calculate the distance between 2 points
+//change from getting point to const Point& otherPoint because of tests
         void print();// Print both coordinates between 2 ( ) ,example: (1.1,2.3)
-        Point moveTowards(Point src, Point dest,double dist);//get 3 points, return the closest point ,that at most is in distance dist from src point
-        double getX();//Return x value
-        double getY();//Return y value
+        static Point moveTowards(const Point &src,const Point &dest,double dist);//get 3 points, return the closest point ,that at most is in distance dist from src point
+        // I made it static because of the way they used it in tests
+        double getX()const;//Return x value
+        double getY()const;//Return y value
     };
 }

@@ -1,6 +1,8 @@
 //
 // Created by yuvalbs on 5/11/23.
 //
+#ifndef INC_4TASKA_TNinja
+#define INC_4TASKA_TNinja
 
 //TrainedNinja נעות במהירות 12 . נוצרות עם 120 נקודות פגיעה. –
 #include "Ninja.hpp"
@@ -15,3 +17,5 @@ namespace ariel {
     };
 
 }
+
+#endif //INC_4TASKA_TNinja

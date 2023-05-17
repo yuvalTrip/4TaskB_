@@ -20,7 +20,7 @@ namespace ariel {
         bullets--;//Decrease by 1
     }
 
-    bool Cowboy::hasBoolets()// If there are left any bullets in the cowboy gun
+    bool Cowboy::hasboolets()// If there are left any bullets in the cowboy gun
     {
         if (bullets==0)
         {

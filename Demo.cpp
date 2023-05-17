@@ -18,16 +18,7 @@ using namespace ariel;
 
 
 int main() {
-    Point a(4.15831,1.5),b(2.5,4);
-    //CHECK(a.distance(b) == b.distance(a));
-    double dist1=3;
-    double dist2=a.distance(b);
-    cout<<"hiiiiiiiiiiiiiiiiiiiiiiii"<<endl;
-    cout<<dist2<<endl;
-    cout<<dist1<<endl;
-
-    /////////
-    //Point a(32.3,44),b(1.3,3.5);
+    Point a(32.3,44),b(1.3,3.5);
     assert(a.distance(b) == b.distance(a));
     Cowboy *tom = new Cowboy("Tom", a);
     OldNinja *sushi = new OldNinja("sushi", b);

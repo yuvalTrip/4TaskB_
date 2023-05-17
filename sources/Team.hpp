@@ -1,6 +1,10 @@
 //
 // Created by yuvalbs on 5/11/23.
 //
+
+#ifndef INC_4TASKA_Team
+#define INC_4TASKA_Team
+
 #include <stdio.h>
 #include "Character.hpp"
 #include "Cowboy.hpp"
@@ -18,7 +22,7 @@ namespace ariel {
 
     public:
         Team(Character *leader);
-
+        Team();// Default constructor
         Character leader;
 
         void add(Character *other);
@@ -46,3 +50,5 @@ namespace ariel {
     };
 
 }
+
+#endif //INC_4TASKA_Team
