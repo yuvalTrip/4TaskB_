@@ -12,7 +12,7 @@
 #include "OldNinja.hpp"
 #include "YoungNinja.hpp"
 #include "TrainedNinja.hpp"
-
+#include "vector" //to use vector for team members
 using namespace std;
 
 namespace ariel {
@@ -23,9 +23,9 @@ namespace ariel {
     public:
         Team(Character *leader);
         Team();// Default constructor
-        Character leader;
-        int howManyAlive=0;
-
+        Character *leader;//Team leader
+        int howManyAlive=0;//how many alive characters in the team
+        std::vector<Character*> members;//vector of all members in the class
         void add(Character *other);
 
         void attack(const Team *other);

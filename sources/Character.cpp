@@ -26,9 +26,9 @@ namespace ariel {
         return 0;
     }
 
-    void Character::hit(int hits)//פגע hit מקבל מספר שלם. מחסיר את כמות נקודות הפגיעה המתאים מהדמות. לא מחזיר דבר. –
+    void Character::hit(int hitsToDecrease)//פגע hit מקבל מספר שלם. מחסיר את כמות נקודות הפגיעה המתאים מהדמות. לא מחזיר דבר. –
     {
-
+        hits=hits-hitsToDecrease;// decrease hitsToDecrease from hits number of the character
     }
 
     string Character::getName()// Return character name

@@ -17,6 +17,9 @@ namespace ariel {
 
     void Ninja::slash(Character *other)// Get pointer to enemy
     {
-
+        if(this->getLocation().distance(other->getLocation()) <= 1)
+        {
+            other->hit(40);
+        }
     }
 }

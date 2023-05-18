@@ -18,6 +18,7 @@ public:
     Point location;//Character location
     string name; //Character name
     int hits;// Hits points
+    bool alreadyInTeam=false;
 
     Character( string name, Point location);//Constructor
     Character(); //Empty Constructor

@@ -17,8 +17,22 @@ namespace ariel {
 
     void Cowboy::shoot(Character *other)//get pointer to the enemy.
     {
+        if (bullets == 0)//If there is no bullets left, do nothing
+        {
+            return;
+        }
+
+        if (this->isAlive()==false)
+        {
+            throw std::runtime_error("Cannot attack while dead");
+        }
+        if (other->isAlive()==false)
+        {
+            throw std::runtime_error("You cannot shoot a dead target");
+        }
+
+        other->hit(10);// Inflict a hit of 10 points on the enemy
         bullets--;//Decrease by 1
-        other->hits--;
     }
 
     bool Cowboy::hasboolets()// If there are left any bullets in the cowboy gun
