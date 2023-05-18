@@ -17,6 +17,7 @@ namespace ariel {
 
     void Ninja::slash(Character *other)// Get pointer to enemy
     {
+        cout<<"coeboy is dead??: "<<other->isAlive()<<endl;
         if(this->getLocation().distance(other->getLocation()) <= 1)
         {
             other->hit(40);

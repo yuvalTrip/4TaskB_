@@ -42,21 +42,48 @@ namespace ariel {
 
     void Team::attack(const Team *otherTeam)
     {
-//        if (other->)
-
         if(otherTeam == nullptr)
             throw std::invalid_argument("Can not attack a 'null' team!");
+        if (this->leader->isAlive())//If the leader of the attackers is still alive
+        {
+
+        }
+        else// We will choose new leader -the closest one
+        {
+
+        }
+
+
     }
 
     int Team::stillAlive() {
         return howManyAlive;
-        return 0;
     }
 
     void Team::print() {
 
     }
 
+    Character Team::choose_closest_to_leader(Character *leader)// Function get leader and find the next member who is the closest to him
+{
+    Point leaderLocation = leader->location;
+    int size = members.size();
+    Character *temp=nullptr;
+    int minValue = std::numeric_limits<int>::min();
+    for (Character *member: members)
+    {
+        if (*member=*leader)
+        {continue;}
+        else {
+            if (member.location->distance(leaderLocation)<minValue)
+            {
+                temp=member;
+            }
+        }
+
+    }
+    return temp;
+}
     Team::~Team() {
 
     }

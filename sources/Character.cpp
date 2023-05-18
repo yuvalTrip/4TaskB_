@@ -28,6 +28,10 @@ namespace ariel {
 
     void Character::hit(int hitsToDecrease)//פגע hit מקבל מספר שלם. מחסיר את כמות נקודות הפגיעה המתאים מהדמות. לא מחזיר דבר. –
     {
+        if(hitsToDecrease<0)
+        {
+            throw std::invalid_argument("Can not decrease negative value");
+        }
         hits=hits-hitsToDecrease;// decrease hitsToDecrease from hits number of the character
     }
 
