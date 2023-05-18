@@ -23,7 +23,7 @@ namespace ariel {
 
     double Character::distance( Character *other)//return distance between 2 Characters
     {
-        return 0;
+        return this->location.distance(other->getLocation());
     }
 
     void Character::hit(int hitsToDecrease)//פגע hit מקבל מספר שלם. מחסיר את כמות נקודות הפגיעה המתאים מהדמות. לא מחזיר דבר. –

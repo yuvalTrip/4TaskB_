@@ -24,11 +24,11 @@ namespace ariel {
 
         if (this->isAlive()==false)
         {
-            throw std::runtime_error("Cannot attack while dead");
+            throw std::runtime_error("Can not attack while dead");
         }
         if (other->isAlive()==false)
         {
-            throw std::runtime_error("You cannot shoot a dead target");
+            throw std::runtime_error("You can not shoot a dead target");
         }
 
         other->hit(10);// Inflict a hit of 10 points on the enemy
@@ -46,7 +46,7 @@ namespace ariel {
 
     void Cowboy::reload()// Reload the gun with 6 new bullets
     {
-        bullets=bullets+6;
+        bullets=6;
     }
 
 

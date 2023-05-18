@@ -15,7 +15,6 @@ namespace ariel {
     private:
     public:
         int bullets;
-        int hits;
         Cowboy( string name,  Point location);//constructor,like:Cowboy *tom = new Cowboy("Tom", a);
         void shoot(Character *other);//get pointer to the enemy.
         // If the cowboy is not dead, and left with bulllets he will shoot the enemy . Decrease 10 hit points from the enemy and loose one ball
