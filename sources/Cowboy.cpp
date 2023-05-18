@@ -30,7 +30,10 @@ namespace ariel {
         {
             throw std::runtime_error("You can not shoot a dead target");
         }
-
+        if(other == this)
+        {
+            throw std::runtime_error("No self harm allowed!");
+        }
         other->hit(10);// Inflict a hit of 10 points on the enemy
         bullets--;//Decrease by 1
     }
@@ -46,6 +49,8 @@ namespace ariel {
 
     void Cowboy::reload()// Reload the gun with 6 new bullets
     {
+        if(hits <= 0)
+            throw std::runtime_error("Cowboy is dead. Can not overload!");
         bullets=6;
     }
 

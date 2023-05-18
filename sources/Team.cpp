@@ -50,7 +50,9 @@ namespace ariel {
         }
         else// We will choose new leader -the closest one
         {
-
+            Character* new_leader=choose_closest_to_leader(leader);//Choose new leader from our team
+            Character* next_target=choose_closest_to_leader(otherTeam->leader);//choose next victim from the enemy team
+/////////////////////////////////////////////////////////////////////////////////////////////????
         }
 
 
@@ -64,7 +66,7 @@ namespace ariel {
 
     }
 
-    Character Team::choose_closest_to_leader(Character *leader)// Function get leader and find the next member who is the closest to him
+    Character* Team::choose_closest_to_leader(Character *leader)// Function get leader and find the next member who is the closest to him
 {
     Point leaderLocation = leader->location;
     int size = members.size();
@@ -72,10 +74,10 @@ namespace ariel {
     int minValue = std::numeric_limits<int>::min();
     for (Character *member: members)
     {
-        if (*member=*leader)
+        if (member==leader)
         {continue;}
         else {
-            if (member.location->distance(leaderLocation)<minValue)
+            if (member->location.distance(leaderLocation)<minValue)
             {
                 temp=member;
             }
