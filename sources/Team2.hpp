@@ -14,6 +14,8 @@ namespace ariel {
     public:
         Team2(Character *leader);
         Team2();// Empty Constructor (compiler said this is must )
+        void add(Character *other) override;
+
     };
 
 }

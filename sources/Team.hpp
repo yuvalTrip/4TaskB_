@@ -20,21 +20,21 @@ namespace ariel {
 
     class Team {
     int last_index_cowboy=0;
+    Character *leader;//Team leader
+    std::vector<Character*> members;//vector of all members in the class
+
     public:
+        virtual ~Team();
         Team(Character *leader);
         Team();// Default constructor
-        Character *leader;//Team leader
-        int howManyAlive=0;//how many alive characters in the team
-        std::vector<Character*> members;//vector of all members in the class
-        void add(Character *other);
-
+//        Character *leader;//Team leader
+//        int howManyAlive=0;//how many alive characters in the team
+        virtual void add(Character *other);
         void attack(const Team *other);
-
         int stillAlive() const;
 
         void print();
         Character* choose_closest_to_leader(Character *other) const;// Function get leader and find the next member who is the closest to him
-        ~Team();
         // Disabling copy and move operations
         Team(const Team&) = delete;// Deleting the copy constructor.
 // This line prevents creating new instances of Team by copying an existing instance.
@@ -47,7 +47,12 @@ namespace ariel {
 
         Team& operator=(Team&&) = delete;// Deleting the move assignment operator.
 // This line prevents assigning one Team object to another using the move assignment operator.
-
+    protected:
+        //Why protected?
+        //It allows derived classes to work with the members vector while still maintaining the desired level of privacy for the base class.
+        std::vector<Character*> getMembers() const {
+            return members;
+        }
     };
 
 }
