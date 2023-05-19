@@ -149,43 +149,53 @@ namespace ariel {
     {
         if (enemyTeam == nullptr)
         {
-            throw std::invalid_argument("Cannot attack a 'null' team!");
+            throw std::invalid_argument("Can not attack a 'null' team!");
         }
 
-        if (leader == nullptr || !leader->isAlive())
+        if ( !leader->isAlive())
         {
             // Choose new leader from our team
             leader = choose_closest_to_leader(leader);
-        }
 
-        while (stillAlive() > 0 && enemyTeam->stillAlive() > 0)
+        }
+        if (leader== nullptr)
         {
+            return;
+        }
+//        while (stillAlive() > 0 && enemyTeam->stillAlive() > 0)
+//        {
             // Choose victim from the enemy team
             Character* victim = enemyTeam->choose_closest_to_leader(leader);
-
-            while (!victim->isAlive())
+            //cout<<"After choose_closest_to_leader: "<<endl;
+            if (victim== nullptr)
             {
-                // Choose another victim if the current one is dead
-                victim = enemyTeam->choose_closest_to_leader(leader);
+                return;
             }
-            cout<<"victim is alive: "<<victim->isAlive()<<endl;
+//            while (!victim->isAlive())
+//            {
+//                // Choose another victim if the current one is dead
+//                victim = enemyTeam->choose_closest_to_leader(leader);
+//            }
+
             // Attack the chosen victim
+            //bool victimKilled = false;
+
             for (Character* attacker : members)
             {
-                if (attacker->isAlive()&& victim->isAlive())// The seconed condition is in case the victim killed during the attack ahd there were attackers left
+                if (attacker->isAlive() && victim->isAlive())
                 {
-                    cout<<"attacker is alive"<<endl;
-
                     Cowboy* cowboy = dynamic_cast<Cowboy*>(attacker);
                     if (cowboy != nullptr)
                     {
                         if (cowboy->bullets > 0)
                         {
-                            cout<<"abefore error"<<endl;
-
                             cowboy->shoot(victim);
-                            cout<<"after error"<<endl;
 
+//                            if (!victim->isAlive())
+//                            {
+//                                victimKilled = true;
+//                                break;
+//                            }
                         }
                         else
                         {
@@ -206,22 +216,20 @@ namespace ariel {
                         }
                     }
                 }
-                if(!victim->isAlive()) //If victim killed during the attack, we will choose a new victim
-                {
-                    while (!victim->isAlive())///////////////////////////////
-                    {
-                        // Choose another victim if the current one is dead
-                        victim = enemyTeam->choose_closest_to_leader(leader);
-                    }
-                }
             }
 
             // Check if the chosen victim is dead after the attack
-            if (!victim->isAlive())
-            {
-                victim = enemyTeam->choose_closest_to_leader(leader);
-            }
-        }
+//            if (!victim->isAlive() && !victimKilled)
+//            {
+//                    // Choose another victim if the current one is dead
+//                    victim = enemyTeam->choose_closest_to_leader(leader);
+//
+//                    if (victim== nullptr)
+//                    {
+//                        break;
+//                    }
+//            }
+       // }
     }
 
 
@@ -235,32 +243,28 @@ namespace ariel {
 
     Character* Team::choose_closest_to_leader(Character *leader) const// Function get leader and find the member who is the closest to him
 {
-    cout<<"im in choose_closest_to_leader: "<<endl;
-
+    //cout<<"im in choose_closest_to_leader: "<<endl;
+    if (leader == nullptr) {
+        // Handle the case when leader pointer is null
+        throw std::invalid_argument("Invalid leader pointer!");
+    }
     Point leaderLocation = leader->location;
-    int size = members.size();
-    int i=0;
     Character *temp=nullptr;
     int maxValue = std::numeric_limits<int>::max();
     for (Character *member: members)
     {
         if (member==leader)
-        {
-            cout<<"i: "<<i<<endl;
-            cout<<"member==leader "<<endl;
-
-            i++;
-
-            continue;}
+        {continue;}
         else {
             if (member->location.distance(leaderLocation)<maxValue && member->isAlive()==true)
             {
                 maxValue = member->location.distance(leaderLocation);
                 temp=member;
-                cout<<"victim updated! "<<endl;
+                //cout<<"victim updated! "<<endl;
             }
         }
     }
+
     return temp;
 }
     Team::~Team() {

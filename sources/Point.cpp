@@ -32,7 +32,7 @@ namespace ariel {
 
      Point Point::moveTowards(const Point &source, const Point &destination, double distance)
     {
-        cout<<"im in moveTowards in point"<<endl;
+        //cout<<"im in moveTowards in point"<<endl;
 
         if(distance < 0)
         {

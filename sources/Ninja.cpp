@@ -12,7 +12,7 @@ namespace ariel {
 
     void Ninja::move(Character *other)// Get pointer to enemy and move toward him. Move distance equal to his speed
     {
-        cout<<"im in move in ninja"<<endl;
+        //cout<<"im in move in ninja"<<endl;
         this->location = this->location.moveTowards(this->getLocation(),other->getLocation(),this->speed);
     }
 
