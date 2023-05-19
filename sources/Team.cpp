@@ -147,11 +147,14 @@ namespace ariel {
 
     void Team::attack(const Team* enemyTeam)
     {
-        if (enemyTeam == nullptr)
+        if (enemyTeam == nullptr )
         {
-            throw std::invalid_argument("Can not attack a 'null' team!");
+            throw std::invalid_argument("Can not attack a 'null' team !");
         }
-
+        if (enemyTeam->stillAlive()==0 )
+        {
+            throw std::runtime_error("Can not attack a dead team !");
+        }
         if ( !leader->isAlive())
         {
             // Choose new leader from our team
@@ -162,8 +165,6 @@ namespace ariel {
         {
             return;
         }
-//        while (stillAlive() > 0 && enemyTeam->stillAlive() > 0)
-//        {
             // Choose victim from the enemy team
             Character* victim = enemyTeam->choose_closest_to_leader(leader);
             //cout<<"After choose_closest_to_leader: "<<endl;
@@ -171,14 +172,8 @@ namespace ariel {
             {
                 return;
             }
-//            while (!victim->isAlive())
-//            {
-//                // Choose another victim if the current one is dead
-//                victim = enemyTeam->choose_closest_to_leader(leader);
-//            }
 
             // Attack the chosen victim
-            //bool victimKilled = false;
 
             for (Character* attacker : members)
             {
@@ -233,8 +228,18 @@ namespace ariel {
     }
 
 
-    int Team::stillAlive() const{
-        return howManyAlive;
+    int Team::stillAlive() const
+    {
+        int stillAlivePeople=0;
+        for (Character *member: members)
+        {
+            if (member->isAlive())
+            {
+//                cout<<"member name: "<<member->name<<endl;
+                stillAlivePeople++;
+            }
+        }
+        return stillAlivePeople;
     }
 
     void Team::print() {
@@ -253,7 +258,7 @@ namespace ariel {
     int maxValue = std::numeric_limits<int>::max();
     for (Character *member: members)
     {
-        if (member==leader)
+        if (member==leader)/////////////////////////??
         {continue;}
         else {
             if (member->location.distance(leaderLocation)<maxValue && member->isAlive()==true)
@@ -262,6 +267,10 @@ namespace ariel {
                 temp=member;
                 //cout<<"victim updated! "<<endl;
             }
+//            if(member->isAlive()==false)
+//            {
+//                howManyAlive=howManyAlive-1;
+//            }
         }
     }
 

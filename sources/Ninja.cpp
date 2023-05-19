@@ -18,13 +18,16 @@ namespace ariel {
 
     void Ninja::slash(Character *other)// Get pointer to enemy
     {
+        if(hits <= 0)
+        {
+            throw std::runtime_error("If you are dead you can not attack");
+        }
         if(other->isAlive() == false)
         {
             throw std::runtime_error("If the other person is dead you can not slash him");
 
         }
-//        cout<<"coeboy is dead??: "<<other->isAlive()<<endl;
-        if(other == this)
+        if(other == this)//Added because tests
         {
             throw std::runtime_error("No self harm allowed!");
         }
@@ -32,10 +35,7 @@ namespace ariel {
         {
             other->hit(40);
         }
-        if(hits <= 0)
-        {
-            throw std::runtime_error("If you are dead you can not attack");
-        }
+
 
 
     }

@@ -140,14 +140,12 @@ TEST_SUITE("Classes initialization tests and Team modification( add(),stillAlive
     }
 
     TEST_CASE("Team initialization") {
-
         auto cowboy = create_cowboy(2, 3);
         auto ninja = create_yninja(2, 3);
         Team team{cowboy};
         CHECK_EQ(team.stillAlive(), 1);
 
         Team2 team2{ninja};
-
         CHECK_EQ(team2.stillAlive(), 1);
     }
 
@@ -218,13 +216,11 @@ TEST_SUITE("Battle related methods") {
         auto target = create_oninja();
 
         auto shoot = [&](int times) {
-            //cout<< "times: "<<times<<endl;
-
             for (int i = 0; i < times; i++) {
                 cowboy->shoot(target);
-                //cout<< "i: "<<i<<endl;
             }
         };
+
         shoot(6);
         CHECK_FALSE(cowboy->hasboolets());
         CHECK_NOTHROW(cowboy->shoot(target)); // This should not damage the target
@@ -232,21 +228,12 @@ TEST_SUITE("Battle related methods") {
 
         shoot(2);
         cowboy->reload();
-        //cout<< "target->hits after 8 shoot: "<<target->hits<< endl;//why no print
-
         shoot(6);
         CHECK(target->isAlive()); // Target should still be alive with 10 hit points if the cowboys damage is 10
-//        cout<< "target->hits after 14 shoot: "<<target->hits<< endl;//why no print
-//        cout<< "cowboy->bullets need to be 0"<<cowboy->bullets<< endl;//why no print
-
         shoot(1);
-//        cout<<"target->isAlive: "<<target->isAlive()   << endl;//why no print
-
         CHECK(target->isAlive()); // Reloading when the magazine isn't empty shouldn't result in more than 6 bullets, the previous shoot should have no effect
         cowboy->reload();
         shoot(1);
-
-//        cout<< "target->hitssssssssssssssssssssssssssssssssssssss: "<<target->hits<< endl;//why no print
         CHECK_FALSE(target->isAlive()); // Target should be dead
         delete cowboy;
         delete target;
@@ -264,10 +251,6 @@ TEST_SUITE("Battle related methods") {
             // After 10 shots, young should die
             if (i < 10) {
                 CHECK(young->isAlive());
-//                cout<< "target->hitssssssssssssssssssssssssssssssssssssss: "<< endl;//why no print
-//                cout<< "cowboy->isalive: : "<<cowboy->isAlive()<< endl;//why no print
-//                cout<< "cowboy->hits: : "<<cowboy->hits  << endl;//why no print
-
                 cowboy->shoot(young);
             }
 
@@ -297,7 +280,6 @@ TEST_SUITE("Battle related methods") {
         Cowboy cowboy{"Clint", Point{0, 0}};
 
         double old_distance = old.distance(&cowboy);
-//        cout<<"old_distance: "<<old_distance<<endl;
         double young_distance = young.distance(&cowboy);
         double trained_distance = trained.distance(&cowboy);
 
@@ -321,16 +303,11 @@ TEST_SUITE("Battle related methods") {
         Cowboy cowboy{"Clint", Point{0.5, 0.5}};
 
         for (int i = 0; i < 1; i++) {
-            cout<<"old->is alive(): "<<old.isAlive()<<endl;
-            cout<<"young->is alive(): "<<young.isAlive()<<endl;
-            cout<<"cowboy->is alive()1: "<<cowboy.isAlive()<<endl;
-
             old.slash(&cowboy);
             young.slash(&cowboy);
         }
 
         CHECK(cowboy.isAlive());
-        cout<<"cowboy->is alive()2: "<<cowboy.isAlive()<<endl;
 
         old.slash(&cowboy);
         CHECK_FALSE(cowboy.isAlive());
@@ -492,13 +469,12 @@ TEST_SUITE("Battle simulations") {
 
         multi_attack(2, team, team2);
         CHECK_FALSE(young_ninja->isAlive()); // Young ninja should be dead
-        cout<<"trained_ninja->isAlive(): "<<trained_ninja->isAlive()<<endl;
-        cout<<"old_ninja->isAlive(): "<<old_ninja->isAlive()<<endl;
-        cout<<"young_ninja2->isAlive(): "<<young_ninja2->isAlive()<<endl;
+        CHECK((trained_ninja->isAlive() && old_ninja->isAlive() &&
+               young_ninja2->isAlive())); // Everyone else should still be alive
 
-        CHECK((trained_ninja->isAlive() && old_ninja->isAlive() &&young_ninja2->isAlive())); // Everyone else should still be alive
         team.attack(&team2);
-        CHECK((!trained_ninja->isAlive() && old_ninja->isAlive() &&young_ninja2->isAlive())); // No one should die in the attack
+        CHECK((!trained_ninja->isAlive() && old_ninja->isAlive() &&
+               young_ninja2->isAlive())); // No one should die in the attack
 
         multi_attack(2, team, team2);
         CHECK_FALSE(trained_ninja->isAlive()); // Trained ninja should be dead
@@ -509,8 +485,12 @@ TEST_SUITE("Battle simulations") {
         CHECK(!young_ninja2->isAlive());
 
         multi_attack(2, team, team2);
-        CHECK_NOTHROW(team.attack(&team2)); // The entire enemy team will be dead before every cowboy shoots, the attack should stop and not throw an exception
+        CHECK_NOTHROW(team.attack(
+                &team2)); // The entire enemy team will be dead before every cowboy shoots, the attack should stop and not throw an exception
         CHECK_FALSE(young_ninja2->isAlive()); // Young ninja should be dead
+        cout<<"team->still alive: "<<team.stillAlive()<<endl;
+        cout<<"team2->still alive: "<<team2.stillAlive()<<endl;
+
         CHECK_THROWS_AS(team.attack(&team2), std::runtime_error); // Attacking a dead team should throw an exception
     }
 
