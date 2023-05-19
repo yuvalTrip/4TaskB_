@@ -19,6 +19,7 @@ namespace ariel {
 
     double Point::distance(const Point& otherPoint)const
     {
+        //cout<<"im distance in point"<<endl;
         double dx = x - otherPoint.x;
         double dy = y - otherPoint.y;
         return std::sqrt(dx * dx + dy * dy);
@@ -31,32 +32,24 @@ namespace ariel {
 
      Point Point::moveTowards(const Point &source, const Point &destination, double distance)
     {
-        double totalDistance = source.distance(destination);
+        cout<<"im in moveTowards in point"<<endl;
 
-        if (distance < 0 || distance > totalDistance) {
-            throw std::invalid_argument("Invalid distance");
+        if(distance < 0)
+        {
+            throw std::invalid_argument("Can not move negative distance");
         }
+        double totalDistance = source.distance(destination);
+        if (totalDistance <= distance) {// If current distance is smaller than distance, we will arive to the destination
+            return destination;
+        }
+        double distx = destination.getX() - source.getX();
+        double disty = destination.getY() - source.getY();
+        double factor = distance / totalDistance;
 
-        double ratio = distance / totalDistance;
-        double newX = source.getX() + (destination.getX() - source.getX()) * ratio;
-        double newY = source.getY() + (destination.getY() - source.getY()) * ratio;
+        double newX = source.getX() + distx * factor;
+        double newY = source.getY() + disty * factor;
 
         return Point(newX, newY);
-//        Point answer=Point();
-//        double dx = destination.x - source.x ;
-//        double dy = destination.y - source.y;
-//        double currentDist = std::sqrt(dx * dx + dy * dy);
-//
-//        if (currentDist <= distance) // If current distance is smaller than distance, we will arive to the destination
-//        {
-//            answer.x = destination.x;
-//            answer.y = destination.y;
-//        } else {
-//            double ratio = distance / currentDist;
-//            answer.x = source.x + dx * ratio;
-//            answer.y = source.y + dy * ratio;
-//        }
-//        return Point();
     }
 
     double Point::getX() const{

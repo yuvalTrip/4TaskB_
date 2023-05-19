@@ -30,10 +30,10 @@ namespace ariel {
 
         void attack(const Team *other);
 
-        int stillAlive();
+        int stillAlive() const;
 
         void print();
-        Character* choose_closest_to_leader(Character *other);// Function get leader and find the next member who is the closest to him
+        Character* choose_closest_to_leader(Character *other) const;// Function get leader and find the next member who is the closest to him
         ~Team();
         // Disabling copy and move operations
         Team(const Team&) = delete;// Deleting the copy constructor.

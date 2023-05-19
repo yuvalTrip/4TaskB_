@@ -44,8 +44,14 @@ int main() {
 
     int i=0;
     while(team_A.stillAlive() > 0 && team_B.stillAlive() > 0){
+        cout << "INTO WHILE" << endl;
+
         team_A.attack(&team_B);
+        cout << " attack1" << endl;
+
         team_B.attack(&team_A);
+        cout << " attack2" << endl;
+
         team_A.print();
         team_B.print();
         cout << "i: "<< i << endl;

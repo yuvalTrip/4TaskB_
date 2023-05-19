@@ -18,6 +18,7 @@ namespace ariel {
 
     bool Character::isAlive()// Is Character alive?== Is Character has more than 0 hits points
     {
+
         return (hits>0);
     }
 

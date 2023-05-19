@@ -12,11 +12,17 @@ namespace ariel {
 
     void Ninja::move(Character *other)// Get pointer to enemy and move toward him. Move distance equal to his speed
     {
+        cout<<"im in move in ninja"<<endl;
         this->location = this->location.moveTowards(this->getLocation(),other->getLocation(),this->speed);
     }
 
     void Ninja::slash(Character *other)// Get pointer to enemy
     {
+        if(other->isAlive() == false)
+        {
+            throw std::runtime_error("If the other person is dead you can not slash him");
+
+        }
 //        cout<<"coeboy is dead??: "<<other->isAlive()<<endl;
         if(other == this)
         {
@@ -30,11 +36,7 @@ namespace ariel {
         {
             throw std::runtime_error("If you are dead you can not attack");
         }
-        if(other->isAlive() == false)
-        {
-            throw std::runtime_error("If the other person is dead you can not slash him");
 
-        }
 
     }
 }
