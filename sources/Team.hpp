@@ -19,7 +19,7 @@ namespace ariel {
 
 
     class Team {
-
+    int last_index_cowboy=0;
     public:
         Team(Character *leader);
         Team();// Default constructor

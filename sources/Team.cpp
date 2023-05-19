@@ -15,28 +15,43 @@ namespace ariel {
 
         }
         else{
-            leader->alreadyInTeam = true;//Change the leader to true so he can not be a leader of another team
+//            leader->alreadyInTeam = true;//Change the leader to true so he can not be a leader of another team
 
             this->leader = leader;
 
-            this->members.push_back(leader);//add leader to the member stack
+            this->add(leader);//add leader to the member stack
 
         }
 
 
     }
 
-    void Team::add(Character *other) {
+    void Team::add(Character *other) {//Implementation of order- first cowboys and then ninjas
         if (members.size()==10)
         {
-            throw std::runtime_error("Can not have more than 10 teammates");
+            throw std::runtime_error("Can not have more than 10 members");
         }
         if (other->alreadyInTeam)
         {
             throw std::runtime_error("Character already in another team");
         }
+        Cowboy* cowboy = dynamic_cast<Cowboy*>(other);//Check if cowboy
+        if (cowboy != nullptr)//If this is a cowboy (and not a ninja)
+        {
+            cout<<"indX: "<<last_index_cowboy<<endl;
+
+            // Insert a new element at index last_index_cowboy
+            members.insert(members.begin() + last_index_cowboy, other);
+            last_index_cowboy++;
+        }else//this is a ninja
+         {
+             cout<<"adding ninja "<<endl;
+            // Insert a new element at the end of the members
+            members.push_back(other);
+
+        }
         howManyAlive++;
-        members.push_back(other);
+//        members.push_back(other);
         other->alreadyInTeam = true;//Change flag
     }
 
@@ -175,15 +190,17 @@ namespace ariel {
 
             // Attack the chosen victim
 
-            for (Character* attacker : members)
+            for (Character* attacker : members)//For any member in the attack team
             {
                 if (attacker->isAlive() && victim->isAlive())
                 {
                     Cowboy* cowboy = dynamic_cast<Cowboy*>(attacker);
-                    if (cowboy != nullptr)
+                    if (cowboy != nullptr)//If this is a cowboy (and not a ninja)
                     {
                         if (cowboy->bullets > 0)
                         {
+                            cout<<"cowboy->bullets-"<<cowboy->bullets<<endl;
+                            cout<<"cowboy shoot-"<<victim->name<<endl;
                             cowboy->shoot(victim);
 
 //                            if (!victim->isAlive())
@@ -201,8 +218,10 @@ namespace ariel {
                     Ninja* ninja = dynamic_cast<Ninja*>(attacker);
                     if (ninja != nullptr)
                     {
-                        if (ninja->location.distance(victim->location) < 1)
+                        if (ninja->location.distance(victim->location) <= 1)
                         {
+                            cout<<"c->distance(victim) "<<ninja->distance(victim) <<endl;
+                            cout<<"Ninja shoot-"<<victim->name<<endl;
                             ninja->slash(victim);
                         }
                         else
@@ -212,19 +231,6 @@ namespace ariel {
                     }
                 }
             }
-
-            // Check if the chosen victim is dead after the attack
-//            if (!victim->isAlive() && !victimKilled)
-//            {
-//                    // Choose another victim if the current one is dead
-//                    victim = enemyTeam->choose_closest_to_leader(leader);
-//
-//                    if (victim== nullptr)
-//                    {
-//                        break;
-//                    }
-//            }
-       // }
     }
 
 
@@ -243,7 +249,9 @@ namespace ariel {
     }
 
     void Team::print() {
-
+        for (Character* member: members) {
+                cout << member->print() << endl;
+        }
     }
 
     Character* Team::choose_closest_to_leader(Character *leader) const// Function get leader and find the member who is the closest to him
