@@ -181,6 +181,8 @@ namespace ariel {
     return temp;
 }
     Team::~Team() {
-
+        for (Character* member: members) {
+            delete member ;
+        }
     }
 }
