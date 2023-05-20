@@ -7,10 +7,11 @@ namespace ariel {
 
     Cowboy::Cowboy(const string name, const Point location):Character(name, location)//constructor,like:Cowboy *tom = new Cowboy("Tom", a);
     {
-        this->name = name;
-        this->location = location;
+//        this->name = name;
+//        this->location = location;
         hits = 110;
         bullets=6;
+        type="C";
 
     }
 

@@ -4,15 +4,12 @@
 
 #include "SmartTeam.hpp"
 namespace ariel {
-
-    SmartTeam::SmartTeam(Character *leader) : Team(leader) {
+    SmartTeam::SmartTeam(Character *leader) : Team(leader){
         // SmartTeam constructor implementation
     }
-    SmartTeam::SmartTeam() : Team() {
-        // SmartTeam empty constructor implementation
-    }
+
     void SmartTeam::add(Character *other) {//Implementation of order- first will be the one with the most hits points
-        const std::vector<Character*>& members = getMembers();
+//        const std::vector<Character*>& members = getMembers();
         if (members.size()==10)
         {
             throw std::runtime_error("Can not have more than 10 members");

@@ -5,9 +5,11 @@
 #include "Ninja.hpp"
 namespace ariel {
 
-    Ninja::Ninja(string name, Point location) {
-        this->name = name;
-        this->location = location;
+    Ninja::Ninja(string name, Point location):Character(name, location) {
+//        this->name = name;
+//        this->location = location;
+        type="N";
+
     }
 
     void Ninja::move(Character *other)// Get pointer to enemy and move toward him. Move distance equal to his speed

@@ -21,6 +21,7 @@ namespace ariel {
     class Team {
     int last_index_cowboy=0;
     Character *leader;//Team leader
+    protected:
     std::vector<Character*> members;//vector of all members in the class
 
     public:
@@ -47,12 +48,12 @@ namespace ariel {
 
         Team& operator=(Team&&) = delete;// Deleting the move assignment operator.
 // This line prevents assigning one Team object to another using the move assignment operator.
-    protected:
-        //Why protected?
-        //It allows derived classes to work with the members vector while still maintaining the desired level of privacy for the base class.
-        std::vector<Character*> getMembers() const {
-            return members;
-        }
+//    protected:
+//        //Why protected?
+//        //It allows derived classes to work with the members vector while still maintaining the desired level of privacy for the base class.
+//        std::vector<Character*> getMembers() const {
+//            return members;
+//        }
     };
 
 }

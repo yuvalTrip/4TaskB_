@@ -12,6 +12,8 @@ using namespace std;
 namespace ariel {
 
     class SmartTeam : public Team {
+//    private:
+//        using Team::members;
     public:
         SmartTeam(Character *leader);
         SmartTeam();// Empty Constructor (compiler said this is must )

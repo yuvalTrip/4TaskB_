@@ -48,13 +48,13 @@ namespace ariel {
 
     string Character::print()
     {
-        string type=x;
-        Cowboy* cowboy = dynamic_cast<Cowboy*>(attacker);
-        if (cowboy != nullptr)//If this is a cowboy (and not a ninja)
-        {
-            type=C;
-        }
-        else{ type=N ;}
+//        string type="x";
+//        Cowboy* cowboy = dynamic_cast<Cowboy*>(attacker);
+//        if (cowboy != nullptr)//If this is a cowboy (and not a ninja)
+//        {
+//            type="C";
+//        }
+//        else{ type="N" ;}
         std::string characterInfo =type+" "+"("+ name+")" + std::to_string(hits) + " (" + std::to_string(location.getX()) + ", " + std::to_string(location.getY()) + ")";
 
         //std::cout << characterInfo << std::endl; // We can print the result to the console
