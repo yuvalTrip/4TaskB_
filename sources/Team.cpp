@@ -185,4 +185,25 @@ namespace ariel {
             delete member ;
         }
     }
+
+    void Team::insert_by_index(Character* other, int index)//I can not made the member vector as public/protected so by using this function I can access it privately
+    {
+        members.insert(members.begin()+index,other);
+    }
+
+    int Team::get_team_size(){//because it is private
+        return members.size();
+    }
+
+    std::vector<Character*> Team::getVector()//function return the 'member' vector
+    {
+        return members;
+    }
+
+    void Team::push_member(Character *other)//Function get character and do the action of vector.push(character)
+    {
+        members.push_back(other);
+    }
+
+
 }

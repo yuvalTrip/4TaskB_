@@ -10,7 +10,7 @@ namespace ariel {
 
     void SmartTeam::add(Character *other) {//Implementation of order- first will be the one with the most hits points
 //        const std::vector<Character*>& members = getMembers();
-        if (members.size()==10)
+        if (get_team_size()==10)
         {
             throw std::runtime_error("Can not have more than 10 members");
         }
@@ -20,7 +20,9 @@ namespace ariel {
         }
 
         int index_toPutNew=0;
-        for(Character* member: members)
+        std::vector<Character*> get_member_vector= SmartTeam::getVector();//function return the 'member' vector
+
+        for(Character* member: get_member_vector)
         {
             if(member->hits<other->hits)
             {
@@ -29,7 +31,8 @@ namespace ariel {
             index_toPutNew++;
         }
         // Insert a new element at index index_toPutNew
-        members.insert(members.begin() + index_toPutNew, other);//members.begin()  is like 0
+        SmartTeam::insert_by_index(other,index_toPutNew);//done this because I changed vector to be private (and not public/protected)
+//        members.insert(members.begin() + index_toPutNew, other);//members.begin()  is like 0
         other->alreadyInTeam = true;//Change flag
     }
 

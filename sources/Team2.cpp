@@ -10,7 +10,8 @@ namespace ariel {
     }
 
     void Team2::add(Character *other) {//Implementation of order- first we got is the first in the team
-        if (members.size()==10)
+//        if (members.size()==10)
+        if (Team::get_team_size()==10)
         {
             throw std::runtime_error("Can not have more than 10 members");
         }
@@ -19,7 +20,9 @@ namespace ariel {
             throw std::runtime_error("Character already in another team");
         }
             // Insert a new element at the end of the members
-            members.push_back(other);
+            //members.push_back(other);
+            Team2::push_member(other);//Function get character and do the action of vector.push(character)
+
         other->alreadyInTeam = true;//Change flag
     }
 }

@@ -21,9 +21,12 @@ namespace ariel {
     class Team {
     int last_index_cowboy=0;
     Character *leader;//Team leader
-    protected:
     std::vector<Character*> members;//vector of all members in the class
 
+    protected:
+    void insert_by_index(Character* other, int index);//I can not made the member vector as public/protected so by using this function I can access it privately
+    std::vector<Character*> getVector();//function return the 'member' vector
+    void push_member(Character *other);//Function get character and do the action of vector.push(character)
     public:
         virtual ~Team();
         Team(Character *leader);
@@ -33,6 +36,7 @@ namespace ariel {
         virtual void add(Character *other);
         void attack(const Team *other);
         int stillAlive() const;
+        int get_team_size();
 
         void print();
         Character* choose_closest_to_leader(Character *other) const;// Function get leader and find the next member who is the closest to him
