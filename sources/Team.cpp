@@ -7,18 +7,14 @@ namespace ariel {
 
     Team::Team(Character *leader)
     {
-//        howManyAlive++;
         if(leader->alreadyInTeam == true)// If the leader already in group
         {
             throw std::runtime_error("leader belongs to team");//Throw an error
 //            cout << "OK6" << endl;
-
         }
         else{
 //            leader->alreadyInTeam = true;//Change the leader to true so he can not be a leader of another team
-
             this->leader = leader;
-
             this->add(leader);//add leader to the member stack
 
         }
@@ -39,7 +35,6 @@ namespace ariel {
         if (cowboy != nullptr)//If this is a cowboy (and not a ninja)
         {
 //            cout<<"indX: "<<last_index_cowboy<<endl;
-
             // Insert a new element at index last_index_cowboy
             members.insert(members.begin() + last_index_cowboy, other);
             last_index_cowboy++;
@@ -50,16 +45,13 @@ namespace ariel {
             members.push_back(other);
 
         }
-//        howManyAlive++;
-//        members.push_back(other);
-        other->alreadyInTeam = true;//Change flag
+        other->alreadyInTeam = true;//Change flag (for not put again the same character in different\the same team
     }
 
     void Team::attack(const Team* enemyTeam)
     {
 //        cout<<"STARTED NEW ATTACK"<<endl;
-
-        if (enemyTeam == nullptr )
+        if (enemyTeam == nullptr )//added because tests
         {
             throw std::invalid_argument("Can not attack a 'null' team !");
         }
@@ -94,7 +86,7 @@ namespace ariel {
                     Cowboy* cowboy = dynamic_cast<Cowboy*>(attacker);
                     if (cowboy != nullptr)//If this is a cowboy (and not a ninja)
                     {
-                        if (cowboy->bullets > 0)
+                        if (cowboy->bullets > 0)//If he have bullets, he will shoot
                         {
 //                            cout<<"cowboy->bullets-"<<cowboy->bullets<<endl;
 //                            cout<<"cowboy shoot-"<<victim->name<<endl;
@@ -102,25 +94,24 @@ namespace ariel {
 //                            cout<<"hits left to victim after attack"<<victim->hits<<endl;
 
                         }
-                        else
+                        else//If not ,he will reload
                         {
                             cowboy->reload();
                         }
                     }
 
-                    Ninja* ninja = dynamic_cast<Ninja*>(attacker);
-                    if (ninja != nullptr)
+                    Ninja* ninja = dynamic_cast<Ninja*>(attacker);//Check if the attacker is ninja
+                    if (ninja != nullptr)//If it is
                     {
 //                        cout<<"c->distance(victim) "<<ninja->distance(victim) <<endl;
-
-                        if (ninja->location.distance(victim->location) <= 1)
+                        if (ninja->location.distance(victim->location) <= 1)//If distance is less then 1 meter, the ninja will attack the victim
                         {
 //                            cout<<"Ninja shoot-"<<victim->name<<endl;
                             ninja->slash(victim);
 //                            cout<<"hits left to victim after attack(ninja)"<<victim->hits<<endl;
 
                         }
-                        else
+                        else//If not, the ninja will move towerds the victim
                         {
                             ninja->move(victim);
                         }

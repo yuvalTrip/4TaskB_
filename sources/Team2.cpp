@@ -10,7 +10,7 @@ namespace ariel {
     }
 
     void Team2::add(Character *other) {//Implementation of order- first we got is the first in the team
-//        if (members.size()==10)
+//        if (members.size()==10) changed members to private so have to change
         if (Team::get_team_size()==10)
         {
             throw std::runtime_error("Can not have more than 10 members");

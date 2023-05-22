@@ -18,13 +18,12 @@ namespace ariel {
 
     bool Character::isAlive()// Is Character alive?== Is Character has more than 0 hits points
     {
-
         return (hits>0);
     }
 
     double Character::distance( Character *other)//return distance between 2 Characters
     {
-        return this->location.distance(other->getLocation());
+        return location.distance(other->getLocation());
     }
 
     void Character::hit(int hitsToDecrease)//פגע hit מקבל מספר שלם. מחסיר את כמות נקודות הפגיעה המתאים מהדמות. לא מחזיר דבר. –

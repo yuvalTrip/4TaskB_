@@ -7,12 +7,9 @@ namespace ariel {
 
     Cowboy::Cowboy(const string name, const Point location):Character(name, location)//constructor,like:Cowboy *tom = new Cowboy("Tom", a);
     {
-//        this->name = name;
-//        this->location = location;
         hits = 110;
         bullets=6;
-        type="C";
-
+        type="C";//For prints
     }
 
 
@@ -23,13 +20,13 @@ namespace ariel {
             return;
         }
 
-        if (this->isAlive()==false)
+        if (this->isAlive()==false)//If he is dead he can not attack
         {
             throw std::runtime_error("Can not attack while dead");
         }
-        if (other->isAlive()==false)
+        if (other->isAlive()==false)// If the character is dead you can not attack her
         {
-            throw std::runtime_error("You can not shoot a dead target");
+            throw std::runtime_error("You can not shoot a dead character");
         }
         if(other == this)
         {
@@ -51,7 +48,9 @@ namespace ariel {
     void Cowboy::reload()// Reload the gun with 6 new bullets
     {
         if(hits <= 0)
-            throw std::runtime_error("Cowboy is dead. Can not overload!");
+        {
+            throw std::runtime_error("Dead Cowboy can not overload!");
+        }
         bullets=6;
     }
 
